@@ -22,6 +22,18 @@
     <Filter Include="Apps">
       <UniqueIdentifier>{0b49bb1f-512e-495c-bc49-3b9adc33adce}</UniqueIdentifier>
     </Filter>
+    <Filter Include="HTTP">
+      <UniqueIdentifier>{420d68d4-5a51-439a-b7e6-cc738a916dd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HTTP\Server">
+      <UniqueIdentifier>{2f0f25c9-a9fc-4bd4-a2c4-0fdca42b67c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HTTP\Security">
+      <UniqueIdentifier>{44d2db82-72fc-4076-9908-310966f86cbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utilities">
+      <UniqueIdentifier>{53bf8b5c-16a7-44cd-a172-c6b21b997bea}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DeploymentHelper.cpp">
@@ -36,6 +48,15 @@
     <ClCompile Include="App.cpp">
       <Filter>Apps</Filter>
     </ClCompile>
+    <ClCompile Include="Security.cpp">
+      <Filter>HTTP\Security</Filter>
+    </ClCompile>
+    <ClCompile Include="Server.cpp">
+      <Filter>HTTP\Server</Filter>
+    </ClCompile>
+    <ClCompile Include="Utilities.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="config\Config.hpp">
@@ -46,6 +67,15 @@
     </ClInclude>
     <ClInclude Include="App.hpp">
       <Filter>Apps</Filter>
+    </ClInclude>
+    <ClInclude Include="Security.hpp">
+      <Filter>HTTP\Security</Filter>
+    </ClInclude>
+    <ClInclude Include="Server.hpp">
+      <Filter>HTTP\Server</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities.hpp">
+      <Filter>Utilities</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
