@@ -1,0 +1,9 @@
+apps:
+  - name: "First Application"
+    repository: "<link>"
+    local: "<local repo path>"
+    steps: # After pulling the repository
+      - name: "Install dependencies/updates"
+        cmd: "npm i --save"
+      - name: "Restart app"
+        cmd: "pm2 restart <app name>"
