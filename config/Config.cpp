@@ -23,7 +23,7 @@ void Config::LoadConfig()
 			std::string name = node["name"].as<std::string>();
 			std::string repository = node["repository"].as<std::string>();
 			std::string local = node["local"].as<std::string>();
-
+			std::string webhookSecret = node["secret"].as<std::string>();
 			/*if (!this->IsValidPath(local))
 			{
 				// show warning, skip this app
@@ -46,7 +46,7 @@ void Config::LoadConfig()
 				steps.push_back(Step(stepCmd, stepName));
 			}
 
-			App tempApp = App(name, repository, local, steps);
+			App tempApp = App(name, repository, local, webhookSecret, steps);
 
 			// Insert app
 
