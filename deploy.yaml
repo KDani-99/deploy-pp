@@ -2,6 +2,7 @@ apps:
   - name: "First Application"
     repository: "<link>"
     local: "<local repo path>"
+    secret: "" # GitHub webhook secret for this repository (used for request validation)
     steps: # After pulling the repository
       - name: "Install dependencies/updates"
         cmd: "npm i --save"
