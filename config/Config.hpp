@@ -16,11 +16,11 @@
 using namespace std;
 using YAML::Parser;
 
-
 class Config {
 	public:
 		void LoadConfig();
 		bool IsValidPath(std::string & path);
+		const App& GetAppByName(const std::string& name);
 	private:
 		std::map<std::string, App> m_apps;
 };
