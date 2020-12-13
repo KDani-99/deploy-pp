@@ -65,3 +65,7 @@ void Config::LoadConfig()
 		// log
 	}
 }
+const App& Config::GetAppByName(const std::string& name)
+{
+	return this->m_apps.at(name);
+}
