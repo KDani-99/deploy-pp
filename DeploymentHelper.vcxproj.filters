@@ -9,18 +9,8 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="Config">
       <UniqueIdentifier>{cfa823a3-c907-4601-8adf-8c53491e9aec}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Steps">
-      <UniqueIdentifier>{d341105f-eea9-4cbe-a375-455cd67fd06c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Apps">
-      <UniqueIdentifier>{0b49bb1f-512e-495c-bc49-3b9adc33adce}</UniqueIdentifier>
     </Filter>
     <Filter Include="HTTP">
       <UniqueIdentifier>{420d68d4-5a51-439a-b7e6-cc738a916dd0}</UniqueIdentifier>
@@ -34,48 +24,66 @@
     <Filter Include="Utilities">
       <UniqueIdentifier>{53bf8b5c-16a7-44cd-a172-c6b21b997bea}</UniqueIdentifier>
     </Filter>
+    <Filter Include="HTTP\ServerConfig">
+      <UniqueIdentifier>{aeb67092-a8af-4e2a-99f9-d380973a2eda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Logger">
+      <UniqueIdentifier>{c97ab499-8530-49b6-ae90-18fb4473ee5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="App">
+      <UniqueIdentifier>{0b49bb1f-512e-495c-bc49-3b9adc33adce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Step">
+      <UniqueIdentifier>{d341105f-eea9-4cbe-a375-455cd67fd06c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DeploymentHelper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="config\Config.cpp">
-      <Filter>Config</Filter>
+    <ClCompile Include="src\Utilities\Utilities.cpp">
+      <Filter>Utilities</Filter>
     </ClCompile>
-    <ClCompile Include="Step.cpp">
-      <Filter>Steps</Filter>
+    <ClCompile Include="src\Step\Step.cpp">
+      <Filter>Step</Filter>
     </ClCompile>
-    <ClCompile Include="App.cpp">
-      <Filter>Apps</Filter>
-    </ClCompile>
-    <ClCompile Include="Security.cpp">
+    <ClCompile Include="src\HTTP\Security\Security.cpp">
       <Filter>HTTP\Security</Filter>
     </ClCompile>
-    <ClCompile Include="Server.cpp">
+    <ClCompile Include="src\HTTP\Server\Server.cpp">
       <Filter>HTTP\Server</Filter>
     </ClCompile>
-    <ClCompile Include="Utilities.cpp">
-      <Filter>Utilities</Filter>
+    <ClCompile Include="src\HTTP\ServerConfig\ServerConfig.cpp">
+      <Filter>HTTP\ServerConfig</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Config\Config.cpp">
+      <Filter>Config</Filter>
+    </ClCompile>
+    <ClCompile Include="src\App\App.cpp">
+      <Filter>App</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="config\Config.hpp">
-      <Filter>Config</Filter>
+    <ClInclude Include="src\Utilities\Utilities.hpp">
+      <Filter>Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="Step.hpp">
-      <Filter>Steps</Filter>
+    <ClInclude Include="src\Step\Step.hpp">
+      <Filter>Step</Filter>
     </ClInclude>
-    <ClInclude Include="App.hpp">
-      <Filter>Apps</Filter>
-    </ClInclude>
-    <ClInclude Include="Security.hpp">
+    <ClInclude Include="src\HTTP\Security\Security.hpp">
       <Filter>HTTP\Security</Filter>
     </ClInclude>
-    <ClInclude Include="Server.hpp">
+    <ClInclude Include="src\HTTP\Server\Server.hpp">
       <Filter>HTTP\Server</Filter>
     </ClInclude>
-    <ClInclude Include="Utilities.hpp">
-      <Filter>Utilities</Filter>
+    <ClInclude Include="src\HTTP\ServerConfig\ServerConfig.hpp">
+      <Filter>HTTP\ServerConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Config\Config.hpp">
+      <Filter>Config</Filter>
+    </ClInclude>
+    <ClInclude Include="src\App\App.hpp">
+      <Filter>App</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

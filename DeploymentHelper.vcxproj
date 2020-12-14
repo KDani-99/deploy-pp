@@ -159,21 +159,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="App.cpp" />
-    <ClCompile Include="config\Config.cpp" />
     <ClCompile Include="DeploymentHelper.cpp" />
-    <ClCompile Include="Security.cpp" />
-    <ClCompile Include="Server.cpp" />
-    <ClCompile Include="Step.cpp" />
-    <ClCompile Include="Utilities.cpp" />
+    <ClCompile Include="src\App\App.cpp" />
+    <ClCompile Include="src\Config\Config.cpp" />
+    <ClCompile Include="src\HTTP\Security\Security.cpp" />
+    <ClCompile Include="src\HTTP\ServerConfig\ServerConfig.cpp" />
+    <ClCompile Include="src\HTTP\Server\Server.cpp" />
+    <ClCompile Include="src\Step\Step.cpp" />
+    <ClCompile Include="src\Utilities\Utilities.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="App.hpp" />
-    <ClInclude Include="config\Config.hpp" />
-    <ClInclude Include="Security.hpp" />
-    <ClInclude Include="Server.hpp" />
-    <ClInclude Include="Step.hpp" />
-    <ClInclude Include="Utilities.hpp" />
+    <ClInclude Include="src\App\App.hpp" />
+    <ClInclude Include="src\Config\Config.hpp" />
+    <ClInclude Include="src\HTTP\Security\Security.hpp" />
+    <ClInclude Include="src\HTTP\ServerConfig\ServerConfig.hpp" />
+    <ClInclude Include="src\HTTP\Server\Server.hpp" />
+    <ClInclude Include="src\Step\Step.hpp" />
+    <ClInclude Include="src\Utilities\Utilities.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

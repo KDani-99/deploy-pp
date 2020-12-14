@@ -1,31 +1,42 @@
 #pragma once
-
+#include "../../HTTP/Security/Security.hpp"
+#include "../../HTTP/ServerConfig/ServerConfig.hpp"
+#include "../../Config/Config.hpp"
 #include <cpprest/http_listener.h>
-#include <cpprest/http_listener.h>              // HTTP server
-#include <cpprest/json.h>                       // JSON library
-#include <cpprest/uri.h>                        // URI library
-#include <cpprest/containerstream.h>            // Async streams backed by STL containers
-#include <cpprest/interopstream.h>              // Bridges for integrating Async streams with STL and WinRT streams
-#include <cpprest/rawptrstream.h>               // Async streams backed by raw pointer to memory
-#include <cpprest/producerconsumerstream.h>     // Async streams for producer consumer scenarios
+#include <cpprest/http_listener.h> 
+#include <cpprest/json.h>  
+#include <cpprest/uri.h>         
+#include <cpprest/containerstream.h>    
+#include <cpprest/interopstream.h>             
+#include <cpprest/rawptrstream.h>     
+#include <cpprest/producerconsumerstream.h>   
 
 using namespace web;
 using namespace http;
 using namespace utility;
 using namespace http::experimental::listener;
-using namespace web::http::experimental::listener;          // HTTP server client
-using namespace web::json;                                  // JSON library
+using namespace web::http::experimental::listener;  
+using namespace web::json;   
 
 class HTTPServer
 {
 	public:
-		HTTPServer(string_t &address);
+		HTTPServer(Config & config);
+		~HTTPServer();
 		pplx::task<void> open() { return m_listener.open(); }
 		pplx::task<void> close() { return m_listener.close(); }
 	private:
-		void InitServer(string_t& address);
+
+		static const string_t HEADER_NAME;
+
+		void InitServer();
 		void HandleGet(http_request request);
 		void HandlePost(http_request request);
 		void SendJSONResponse(int code, const http_request& request,const json::value& jsonObject);
+		void LoadServerConfig();
+
 		http_listener m_listener;
+
+		Config& m_config;
+		ServerConfig * m_serverConfig;
 };

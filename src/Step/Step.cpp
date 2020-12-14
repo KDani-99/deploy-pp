@@ -2,7 +2,6 @@
 
 Step::Step(std::string cmd, std::string name)
 {
-
 }
 std::string Step::GetCommand()
 {

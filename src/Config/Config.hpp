@@ -6,7 +6,7 @@
 #include <ostream>
 #include <fstream>
 
-#include "../App.hpp"
+#include "../App/App.hpp"
 
 #include <yaml-cpp/depthguard.h>
 #include "yaml-cpp/parser.h"
