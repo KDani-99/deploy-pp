@@ -7,13 +7,18 @@ HTTPServer::HTTPServer(Config& config) : m_config(config)
 {
 	this->m_serverConfig = nullptr;
 
+	this->m_logger = new Logger("logs/"); // Folder path (current dir)
+	
 	LoadServerConfig();
 
 	InitServer();
 }
 HTTPServer::~HTTPServer()
 {
-	//delete this->m_serverConfig;
+	this->m_listener.close().wait();
+
+	delete this->m_serverConfig;
+	delete this->m_logger;
 }
 void HTTPServer::LoadServerConfig()
 {
@@ -27,9 +32,9 @@ void HTTPServer::LoadServerConfig()
 
 		this->m_serverConfig = new ServerConfig(ip, port, log);
 	}
-	catch (std::exception ex)
+	catch (const std::exception& ex)
 	{
-		std::cout << ex.what();
+		this->m_logger->Error("HTTP_SERVER_CTOR", ex.what());
 	}
 
 }
@@ -37,7 +42,6 @@ void HTTPServer::InitServer()
 {
 	try
 	{
-
 		string_t address = U("http://") + Utilities::ToString_T(this->m_serverConfig->GetAddress()); // TODO: http/https
 		address += U(":") + Utilities::ToString_T(this->m_serverConfig->GetPort());
 
@@ -56,7 +60,7 @@ void HTTPServer::InitServer()
 	}
 	catch (const std::exception& ex)
 	{
-		ucout <<ex.what();
+		this->m_logger->Error("HTTP_SERVER_INIT", ex.what());
 	}
 }
 void HTTPServer::HandleGet(http_request request)
@@ -66,6 +70,7 @@ void HTTPServer::HandleGet(http_request request)
 void HTTPServer::HandlePost(http_request request)
 {
 	http_response response;
+
 	try
 	{
 		if (request.headers().content_type() != U("application/json"))
@@ -106,7 +111,7 @@ void HTTPServer::HandlePost(http_request request)
 
 		auto stringifiedBody = request.extract_string(true).get();
 
-		if (!Security::CompareSignatures(string(stringifiedBody.begin(), stringifiedBody.end()), app.GetWebhookSecret(), string(signature->second.begin(), signature->second.end())))
+		if (!Security::CompareSignatures(std::string(stringifiedBody.begin(), stringifiedBody.end()), app.GetWebhookSecret(), std::string(signature->second.begin(), signature->second.end())))
 		{
 			json::value jResponse = json::value::object();
 			jResponse[U("status")] = json::value(U("failed"));
@@ -117,30 +122,32 @@ void HTTPServer::HandlePost(http_request request)
 			return;
 		}
 
-		// Trigger and await action
+		// Trigger and await the action(s)
+
 		app.TriggerActions();
 
 		json::value jResponse = json::value::object();
 		jResponse[U("status")] = json::value(U("successful"));
 		this->SendJSONResponse(200, request, jResponse);
+
 		return;
 	}
 	catch (const std::exception& ex)
 	{
+		// Generate a random GUID 
+		std::string uuidStr = Utilities::GenerateUUID();
 
+		this->m_logger->Error(uuidStr, ex.what());
+		
+		// If it ever gets here, throw an error
+
+		json::value jResponse = json::value::object();
+		jResponse[U("status")] = json::value(U("failed"));
+		jResponse[U("error")] = json::value(U("request_failed"));
+		jResponse[U("unique_error_code")] = json::value(Utilities::ToString_T(uuidStr));
+
+		this->SendJSONResponse(400, request, jResponse);
 	}
-	catch (...)
-	{
-
-	}
-
-	// If it ever gets here, throw an error
-
-	json::value jResponse = json::value::object();
-	jResponse[U("status")] = json::value(U("failed"));
-	jResponse[U("error")] = json::value(U("request_failed"));
-
-	this->SendJSONResponse(400, request, jResponse);
 }
 void HTTPServer::SendJSONResponse(int code,const http_request& request,const json::value& jsonObject)
 {
