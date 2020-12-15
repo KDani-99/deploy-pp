@@ -89,11 +89,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\C++ Libraries\yaml-cpp\include\;D:\vcpkg-2020.11-1\packages\cpprestsdk_x64-windows\include;C:\OpenSSL-Win64\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\C++ Libraries\boost_1_75_0\;D:\C++ Libraries\yaml-cpp\include\;D:\vcpkg-2020.11-1\packages\cpprestsdk_x64-windows\include;C:\OpenSSL-Win64\include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <UndefinePreprocessorDefinitions>
+      </UndefinePreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -108,11 +110,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\C++ Libraries\yaml-cpp\include\;D:\vcpkg-2020.11-1\packages\cpprestsdk_x64-windows\include;C:\OpenSSL-Win64\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\C++ Libraries\boost_1_75_0\;D:\C++ Libraries\yaml-cpp\include\;D:\vcpkg-2020.11-1\packages\cpprestsdk_x64-windows\include;C:\OpenSSL-Win64\include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <UndefinePreprocessorDefinitions>
+      </UndefinePreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -165,6 +169,7 @@
     <ClCompile Include="src\HTTP\Security\Security.cpp" />
     <ClCompile Include="src\HTTP\ServerConfig\ServerConfig.cpp" />
     <ClCompile Include="src\HTTP\Server\Server.cpp" />
+    <ClCompile Include="src\Logger\Logger.cpp" />
     <ClCompile Include="src\Step\Step.cpp" />
     <ClCompile Include="src\Utilities\Utilities.cpp" />
   </ItemGroup>
@@ -174,6 +179,7 @@
     <ClInclude Include="src\HTTP\Security\Security.hpp" />
     <ClInclude Include="src\HTTP\ServerConfig\ServerConfig.hpp" />
     <ClInclude Include="src\HTTP\Server\Server.hpp" />
+    <ClInclude Include="src\Logger\Logger.hpp" />
     <ClInclude Include="src\Step\Step.hpp" />
     <ClInclude Include="src\Utilities\Utilities.hpp" />
   </ItemGroup>
