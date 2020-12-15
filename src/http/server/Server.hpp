@@ -2,6 +2,7 @@
 #include "../../HTTP/Security/Security.hpp"
 #include "../../HTTP/ServerConfig/ServerConfig.hpp"
 #include "../../Config/Config.hpp"
+#include "../../Logger/Logger.hpp"
 #include <cpprest/http_listener.h>
 #include <cpprest/http_listener.h> 
 #include <cpprest/json.h>  
@@ -23,8 +24,6 @@ class HTTPServer
 	public:
 		HTTPServer(Config & config);
 		~HTTPServer();
-		pplx::task<void> open() { return m_listener.open(); }
-		pplx::task<void> close() { return m_listener.close(); }
 	private:
 
 		static const string_t HEADER_NAME;
@@ -36,7 +35,7 @@ class HTTPServer
 		void LoadServerConfig();
 
 		http_listener m_listener;
-
 		Config& m_config;
 		ServerConfig * m_serverConfig;
+		Logger* m_logger;
 };
