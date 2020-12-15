@@ -62,6 +62,9 @@
     <ClCompile Include="src\App\App.cpp">
       <Filter>App</Filter>
     </ClCompile>
+    <ClCompile Include="src\Logger\Logger.cpp">
+      <Filter>Logger</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Utilities\Utilities.hpp">
@@ -84,6 +87,9 @@
     </ClInclude>
     <ClInclude Include="src\App\App.hpp">
       <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Logger\Logger.hpp">
+      <Filter>Logger</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
