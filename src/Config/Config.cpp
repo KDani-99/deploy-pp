@@ -37,7 +37,7 @@ void Config::LoadConfig()
 
 			YAML::Node stepsNode = node["steps"].as<YAML::Node>();
 
-			vector<Step> steps;
+			std::vector<Step> steps;
 
 			for (YAML::Node::iterator stepIt = stepsNode.begin(); stepIt != stepsNode.end(); ++stepIt)
 			{

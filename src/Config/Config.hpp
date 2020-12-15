@@ -13,7 +13,7 @@
 #include "yaml-cpp/exceptions.h"
 #include "yaml-cpp/yaml.h"
 
-using namespace std;
+//using namespace std;
 using YAML::Parser;
 
 class Config {
