@@ -15,10 +15,6 @@ std::string App::GetLocalRepositoryPath()
 {
 	return this->m_local;
 }
-std::vector<Step> App::GetSteps()
-{
-	return this->m_steps;
-}
 std::string App::GetWebhookSecret()
 {
 	return this->m_webhookSecret;
