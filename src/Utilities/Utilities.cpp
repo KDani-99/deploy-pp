@@ -8,11 +8,7 @@ std::string Utilities::GetProjectName(std::string fullPath)
 }
 string_t Utilities::ToString_T(std::string input)
 {
-	std::wstring result(input.length(), L' '); 
-
-	std::copy(input.begin(), input.end(), result.begin());
-
-	return result;
+	return string_t(input.begin(),input.end());
 }
 string_t Utilities::ToString_T(unsigned short input)
 {
