@@ -7,7 +7,14 @@
 
 #include <boost/filesystem.hpp>
 
+#include <yaml-cpp/depthguard.h>
+#include <yaml-cpp/parser.h>
+#include <yaml-cpp/exceptions.h>
+#include <yaml-cpp/yaml.h>
+
 #include "../Utilities/Utilities.hpp"
+
+using YAML::Parser;
 
 class Logger
 {
@@ -22,4 +29,5 @@ class Logger
 		void Info(std::string label,std::string info);
 		void Warning(std::string label, std::string info);
 		void Error(std::string label, std::string info);
+		void Success(std::string delivery, std::string event, int hookId,std::string before, std::string after);
 };
