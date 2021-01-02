@@ -43,6 +43,7 @@ std::string Security::GetHMAC(std::string key, std::string message)
 
 	std::stringstream ss;
 	ss << std::hex << std::setfill('0');
+
 	for (int i = 0; i < 32; i++) // ?
 	{
 		ss << std::hex << std::setw(2) << (unsigned int)hash[i];

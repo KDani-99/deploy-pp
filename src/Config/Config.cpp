@@ -1,5 +1,13 @@
 #include "Config.hpp"
 
+Config::Config(std::string logPath)
+{
+	this->m_logger = new Logger(logPath);
+}
+Config::~Config()
+{
+	delete this->m_logger;
+}
 bool Config::IsValidPath(std::string & path)
 {
 	return boost::filesystem::exists(path);
@@ -25,18 +33,17 @@ void Config::LoadConfig()
 			std::string branch = node["branch"].as<std::string>();
 			std::string webhookSecret = node["secret"].as<std::string>();
 			bool force = node["force"].as<bool>();
-			/*if (!this->IsValidPath(local))
+
+			if (!this->IsValidPath(local))
 			{
-				// show warning, skip this app
-
+				std::string warn = "Local repository (path: ";
+				warn += local;
+				warn += " ) does not exist. Skipping app.";
+				this->m_logger->Warning("App", warn);
 				continue;
-			}*/
+			}
 
-			std::cout << name << std::endl;
-			std::cout << repository << std::endl;
-			std::cout << local << std::endl;
-
-			// Load steps
+			// Load build steps
 
 			YAML::Node stepsNode = node["steps"].as<YAML::Node>();
 
@@ -51,14 +58,12 @@ void Config::LoadConfig()
 				steps.push_back(Step(stepCmd, stepName));
 			}
 
-			App tempApp = App(name, repository, local,branch, webhookSecret,force, steps);
+			App tempApp = App(name, repository, local,branch, webhookSecret,force, steps,this->m_logger);
 
 			// Insert app
 
 			this->m_apps.insert(std::pair<std::string,App>(name, tempApp));
 		}
-
-		std::cout << "Apps size: " << this->m_apps.size() << std::endl;
 	}
 	catch (std::exception& ex)
 	{
@@ -73,4 +78,8 @@ void Config::LoadConfig()
 const App& Config::GetAppByName(const std::string& name)
 {
 	return this->m_apps.at(name);
+}
+Logger* Config::GetLogger() const
+{
+	return this->m_logger;
 }

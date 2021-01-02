@@ -17,9 +17,13 @@ using YAML::Parser;
 
 class Config {
 	public:
+		Config(std::string logPath);
+		~Config();
 		void LoadConfig();
 		bool IsValidPath(std::string & path);
 		const App& GetAppByName(const std::string& name);
+		Logger* GetLogger() const;
 	private:
 		std::map<std::string, App> m_apps;
+		Logger* m_logger;
 };
