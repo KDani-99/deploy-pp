@@ -22,7 +22,7 @@
 
 bool Security::CompareSignatures(std::string body,std::string key,std::string received)
 {
-	std::string calculated = Security::GetHMAC(key, body);
+	std::string calculated = "sha256=" + Security::GetHMAC(key, body);
 
 	return TimingSafeEqual(calculated.c_str(),received.c_str(),calculated.size()) == 0;
 }
