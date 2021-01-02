@@ -34,8 +34,9 @@ class HTTPServer
 		void SendJSONResponse(int code, const http_request& request,const json::value& jsonObject);
 		void LoadServerConfig();
 
+		static std::string GetHeaderValue(const http_headers & headers, const string_t & key);
+
 		http_listener m_listener;
 		Config& m_config;
 		ServerConfig * m_serverConfig;
-		Logger* m_logger;
 };
