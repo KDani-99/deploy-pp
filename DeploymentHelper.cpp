@@ -5,18 +5,12 @@
 
 int main()
 {
-	// Designed for reverse proxys, no ssl support (yet)
+	// Designed for reverse proxy, it has no ssl support (yet)
 
-	// Load config.yaml
-
-	Config config = Config();
+	Config config = Config("logs/");
 	config.LoadConfig();
 
-	// Instantiate the server (using the config instance)
-
 	HTTPServer server(config);
-
-	// Keep the app running (should be started from a process manager)
 
 	std::string line;
 	std::getline(std::cin, line);
