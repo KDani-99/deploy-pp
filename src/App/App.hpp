@@ -1,12 +1,8 @@
 #pragma once
 #include <string>
 #include <vector>
-/*#ifndef __UNIX__
-	#include<unistd.h>  
-#endif*/
 #include <iostream>
-#include <filesystem>
-#include <direct.h>
+#include <boost/filesystem.hpp>
 #include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>

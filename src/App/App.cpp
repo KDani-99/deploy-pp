@@ -46,21 +46,17 @@ void App::Pull()
 }
 void App::TriggerActions()
 {
-	char cdArr[255];
-	auto currentDirectory = _getcwd(cdArr, sizeof(cdArr));
+	//char cdArr[255];
+	auto currentDirectory = boost::filesystem::current_path();//_getcwd(cdArr, sizeof(cdArr));
 	
 	this->Pull();
 
 	try
 	{
 		// Default: CD to directory
-		auto cd = _chdir(this->GetLocalRepositoryPath().c_str());
-		if (cd != 0)
-		{
-			// TODO: log error
-			return;
-		}
-		//_wchdir();
+		
+		boost::filesystem::current_path(this->GetLocalRepositoryPath().c_str());
+		//auto cd =  //_chdir(this->GetLocalRepositoryPath().c_str());
 		
 		for (auto& action : this->m_steps)
 		{
@@ -80,10 +76,5 @@ void App::TriggerActions()
 	}
 
 	// TODO: Change back to default dir
-	int result = _chdir(currentDirectory);
-
-	if (result != 0)
-	{
-		// TODO: log error
-	}
+	boost::filesystem::current_path(currentDirectory);
 }
