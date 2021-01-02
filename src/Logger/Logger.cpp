@@ -15,8 +15,8 @@ std::string Logger::GetDate()
 
 Logger::Logger(std::string path)
 {
-	if (!fs::is_directory(path) || !fs::exists(path))
-		fs::create_directory(path);
+	if (!boost::filesystem::is_directory(path) || !boost::filesystem::exists(path))
+		boost::filesystem::create_directory(path);
 
 	this->m_path = path + "log_" + std::to_string(Utilities::GetCurrentTimestamp()) + ".log"; // Each run should have it's own log file
 }
