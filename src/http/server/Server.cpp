@@ -102,9 +102,13 @@ void HTTPServer::HandlePost(http_request request)
 
 		auto signature = request.headers().find(HTTPServer::HEADER_NAME);
 
-		auto body = request.extract_json(true).get();
+		auto stringifiedBody = request.extract_string().get();
 
-		auto project = body.at(U("url")).as_string();
+		auto body = json::value::parse(stringifiedBody);//request.extract_json(false).get();
+
+		auto repository = body.at(U("repository")).as_object();
+
+		auto project = repository.at(U("url")).as_string();
 
 		std::string projectName = Utilities::GetProjectName(std::string(project.begin(), project.end()));
 
