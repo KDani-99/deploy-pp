@@ -1,6 +1,6 @@
 set(CMAKE_CXX_STANDARD 17)
 set(cpprestsdk_DIR /usr/lib/x86_64-linux-gnu/cmake/)
-set(yaml-cpp_DIR /home/daniel/yaml-cpp/build) # replace with yaml-cpp build directory
+set(yaml-cpp_DIR /home/daniel/yaml-cpp/build) # replace with the actual yaml-cpp build directory
 
 cmake_minimum_required(VERSION 3.9)
 project(main)
