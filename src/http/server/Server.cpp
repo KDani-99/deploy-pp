@@ -1,7 +1,7 @@
 #include "Server.hpp"
 #include "../../Utilities/Utilities.hpp"
 
-const string_t HTTPServer::HEADER_NAME = U("x-hub-signature");
+const string_t HTTPServer::HEADER_NAME = U("x-hub-signature-256"); // sh256 instead of sha1
 
 HTTPServer::HTTPServer(Config& config) : m_config(config)
 {
