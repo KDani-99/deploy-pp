@@ -116,8 +116,6 @@ void HTTPServer::HandlePost(http_request request)
 
 		auto app = this->m_config.GetAppByName(projectName);
 
-		auto stringifiedBody = request.extract_string(true).get();
-
 		if (!Security::CompareSignatures(std::string(stringifiedBody.begin(), stringifiedBody.end()), app.GetWebhookSecret(), std::string(signature->second.begin(), signature->second.end())))
 		{
 			json::value jResponse = json::value::object();
