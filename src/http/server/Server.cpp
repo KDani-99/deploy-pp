@@ -7,7 +7,7 @@ HTTPServer::HTTPServer(Config& config) : m_config(config)
 {
 	this->m_serverConfig = nullptr;
 
-	this->m_logger = new Logger("logs/"); // Folder path (current dir)
+	//this->m_logger = new Logger("logs/"); // Folder path (current dir)
 	
 	LoadServerConfig();
 
@@ -18,7 +18,7 @@ HTTPServer::~HTTPServer()
 	this->m_listener.close().wait();
 
 	delete this->m_serverConfig;
-	delete this->m_logger;
+	//delete this->m_config.GetLogger();
 }
 void HTTPServer::LoadServerConfig()
 {
@@ -34,7 +34,7 @@ void HTTPServer::LoadServerConfig()
 	}
 	catch (const std::exception& ex)
 	{
-		this->m_logger->Error("HTTP_SERVER_CTOR", ex.what());
+		this->m_config.GetLogger()->Error("HTTP_SERVER_CTOR", ex.what());
 	}
 
 }
@@ -60,7 +60,7 @@ void HTTPServer::InitServer()
 	}
 	catch (const std::exception& ex)
 	{
-		this->m_logger->Error("HTTP_SERVER_INIT", ex.what());
+		this->m_config.GetLogger()->Error("HTTP_SERVER_INIT", ex.what());
 	}
 }
 void HTTPServer::HandleGet(http_request request)
@@ -70,9 +70,6 @@ void HTTPServer::HandleGet(http_request request)
 void HTTPServer::HandlePost(http_request request)
 {
 	http_response response;
-
-	for(auto & header : request.headers())
-		ucout << header.first << std::endl;
 
 	try
 	{
@@ -100,7 +97,7 @@ void HTTPServer::HandlePost(http_request request)
 			return;
 		}
 
-		auto signature = request.headers().find(HTTPServer::HEADER_NAME);
+		auto signature = headers.find(HTTPServer::HEADER_NAME);
 
 		auto stringifiedBody = request.extract_string().get();
 
@@ -129,7 +126,19 @@ void HTTPServer::HandlePost(http_request request)
 
 		// Trigger and await the action(s)
 
-		app.TriggerActions();
+		app.TriggerActions(); // throws std::exception
+
+		const auto delivery = HTTPServer::GetHeaderValue(headers, U("X-GitHub-Delivery"));
+		const auto event = HTTPServer::GetHeaderValue(headers, U("X-GitHub-Event"));
+		const int hookId = stoi(HTTPServer::GetHeaderValue(headers, U("X-GitHub-Hook-ID")));
+
+		const auto tempBefore = body.at(U("before")).as_string();
+		const auto tempAfter = body.at(U("after")).as_string();
+
+		const auto before = std::string(tempBefore.begin(), tempBefore.end());
+		const auto after = std::string(tempAfter.begin(), tempAfter.end());
+
+		this->m_config.GetLogger()->Success(delivery,event,hookId, before, after);
 
 		json::value jResponse = json::value::object();
 		jResponse[U("status")] = json::value(U("successful"));
@@ -142,7 +151,7 @@ void HTTPServer::HandlePost(http_request request)
 		// Generate a random GUID 
 		std::string uuidStr = Utilities::GenerateUUID();
 
-		this->m_logger->Error(uuidStr, ex.what());
+		this->m_config.GetLogger()->Error(uuidStr, ex.what());
 		
 		// If it ever gets here, throw an error
 
@@ -151,7 +160,7 @@ void HTTPServer::HandlePost(http_request request)
 		jResponse[U("error")] = json::value(U("request_failed"));
 		jResponse[U("unique_error_code")] = json::value(Utilities::ToString_T(uuidStr));
 
-		this->SendJSONResponse(400, request, jResponse);
+		this->SendJSONResponse(500, request, jResponse); // Internal server error
 	}
 }
 void HTTPServer::SendJSONResponse(int code,const http_request& request,const json::value& jsonObject)
@@ -169,4 +178,11 @@ void HTTPServer::SendJSONResponse(int code,const http_request& request,const jso
 	// Send reply
 
 	request.reply(response).wait();
+}
+std::string HTTPServer::GetHeaderValue(const http_headers& headers,const string_t & key)
+{
+	for (auto& header : headers)
+		if (header.first == key)
+			return std::string(header.second.begin(), header.second.end());
+	return "";
 }
