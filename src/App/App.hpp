@@ -24,7 +24,6 @@ class App
 		std::string GetRemoteRepository();
 		std::string GetLocalRepositoryPath();
 		std::string GetWebhookSecret();
-		std::vector<Step> GetSteps(); // [deprecated]
 
 		void Pull();
 		void TriggerActions();
