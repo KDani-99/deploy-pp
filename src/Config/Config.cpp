@@ -2,8 +2,7 @@
 
 bool Config::IsValidPath(std::string & path)
 {
-	struct stat buffer;
-	return (stat(path.c_str(), &buffer) == 0);
+	return boost::filesystem::exists(path);
 }
 
 void Config::LoadConfig()
@@ -32,6 +31,10 @@ void Config::LoadConfig()
 
 				continue;
 			}*/
+
+			std::cout << name << std::endl;
+			std::cout << repository << std::endl;
+			std::cout << local << std::endl;
 
 			// Load steps
 
