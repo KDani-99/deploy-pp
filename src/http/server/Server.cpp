@@ -71,6 +71,9 @@ void HTTPServer::HandlePost(http_request request)
 {
 	http_response response;
 
+	for(auto & header : request.headers())
+		ucout << header.first << std::endl;
+
 	try
 	{
 		if (request.headers().content_type() != U("application/json"))
