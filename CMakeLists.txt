@@ -1,13 +1,6 @@
 set(CMAKE_CXX_STANDARD 17)
 set(cpprestsdk_DIR /usr/lib/x86_64-linux-gnu/cmake/)
-set(yaml-cpp_DIR /home/daniel/yaml-cpp/build)
-#find_library(CPPREST_LIB cpprest)
-
-#find_library(cpprest REQUIRED)
-#find_package(cpprestsdk REQUIRED NAMES cpprestsdk cpprest)
-#find_package(cpprestsdk REQUIRED)
-
-
+set(yaml-cpp_DIR /usr/lib/yaml-cpp/build)
 
 cmake_minimum_required(VERSION 3.9)
 project(main)
@@ -17,7 +10,7 @@ find_package(OpenSSL REQUIRED)
 find_package(Boost COMPONENTS random system thread filesystem chrono atomic date_time regex REQUIRED)
 
 file(GLOB SOURCES
-    "DeploymentHelper.cpp"
+    "DeployPP.cpp"
     "src/App/App.cpp"
     "src/App/App.hpp"
     "src/Config/Config.hpp"
@@ -36,11 +29,7 @@ file(GLOB SOURCES
     "src/Utilities/Utilities.cpp"
 )
 
-#add_executable(deploypp DeploymentHelper.cpp)
-
 add_executable(deploypp ${SOURCES})
-
-#target_compile_features(${TARGET_NAME} PRIVATE cxx_std_17)
 
 target_link_libraries(deploypp PUBLIC
 cpprestsdk::cpprest
