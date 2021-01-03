@@ -51,7 +51,7 @@ void App::TriggerActions()
 	{
 		// TODO: Log execution (if enabled)
 
-		std::string msg = "Executing step: ";
+		std::string msg = "Executing action: ";
 		msg += action.GetStepName();
 
 		this->m_logger->Info("Action", msg);
@@ -59,7 +59,7 @@ void App::TriggerActions()
 		int result = system(action.GetCommand().c_str());
 		if (result != 0)
 		{
-			std::string err = "Execution failed for step: ";
+			std::string err = "Execution failed for action: ";
 			err += action.GetStepName();
 			err += " ( ";
 			err += "command: ";
