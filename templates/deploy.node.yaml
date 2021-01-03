@@ -1,0 +1,12 @@
+apps:
+  - name: "node.js application" # name of the application (can be anything)
+    repository: "<link>" # remote repository link
+    branch: "<name>" # remote branch to pull
+    force: false # --force tag (git pull)
+    local: "<local repo path>" # local repository path
+    secret: "<webook secret>" # webhook secret for this repository (used for request validation)
+    steps: # actions after pulling the repository
+      - name: "Install dependencies/updates" # name of the step (can be anything)
+        cmd: "npm i --save" # command
+      - name: "Restart the app"
+        cmd: "pm2 restart <app name>"
