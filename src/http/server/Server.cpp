@@ -57,6 +57,9 @@ void HTTPServer::InitServer()
 		m_listener.open().wait();
 
 		ucout << utility::string_t(U("Server started ")) << addr << std::endl;
+		std::string info = "Server started @ ";
+		info += std::string(addr.begin(), addr.end());
+		this->m_config.GetLogger()->Info("Server",info);
 	}
 	catch (const std::exception& ex)
 	{
@@ -65,12 +68,28 @@ void HTTPServer::InitServer()
 }
 void HTTPServer::HandleGet(http_request request)
 {
-	// TODO: 
+	json::value jResponse = json::value::object();
+
+	try
+	{
+		jResponse[U("name")] = json::value(U("GitHub Webhook Deploy Server"));
+		jResponse[U("version")] = json::value(Utilities::ToString_T(this->m_config.version));
+
+		this->SendJSONResponse(200, request, jResponse);
+	}
+	catch (const std::exception& ex)
+	{
+		std::string uuidStr = Utilities::GenerateUUID();
+
+		jResponse[U("status")] = json::value(U("failed"));
+		jResponse[U("error")] = json::value(U("request_failed"));
+		jResponse[U("unique_error_code")] = json::value(Utilities::ToString_T(uuidStr));
+
+		this->SendJSONResponse(500, request, jResponse); // Internal server error
+	}
 }
 void HTTPServer::HandlePost(http_request request)
 {
-	http_response response;
-
 	try
 	{
 		if (request.headers().content_type() != U("application/json"))

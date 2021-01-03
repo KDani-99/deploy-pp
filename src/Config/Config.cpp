@@ -1,5 +1,7 @@
 #include "Config.hpp"
 
+std::string Config::version = "1.0";
+
 Config::Config(std::string logPath)
 {
 	this->m_logger = new Logger(logPath);
@@ -36,9 +38,11 @@ void Config::LoadConfig()
 
 			if (!this->IsValidPath(local))
 			{
-				std::string warn = "Local repository (path: ";
+				std::string warn = "Local repository (path: `";
 				warn += local;
-				warn += " ) does not exist. Skipping app.";
+				warn += "` ) does not exist. App will be skipped. (";
+				warn += name;
+				warn += ")";
 				this->m_logger->Warning("App", warn);
 				continue;
 			}

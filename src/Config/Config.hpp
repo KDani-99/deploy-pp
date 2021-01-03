@@ -17,6 +17,9 @@ using YAML::Parser;
 
 class Config {
 	public:
+
+		static std::string version;
+
 		Config(std::string logPath);
 		~Config();
 		void LoadConfig();
